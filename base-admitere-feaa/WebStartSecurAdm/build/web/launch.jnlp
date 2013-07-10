@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://localhost:8080/WebStartSecurAdm" href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>SpringDemoClient</title>
+        <vendor>catalin</vendor>
+        <homepage href=""/>
+        <description>SpringDemoClient</description>
+        <description kind="short">SpringDemoClient</description>
+    </information>
+    
+    <security>
+        <all-permissions/>
+    </security>
+
+    <resources>
+        <j2se version="1.5+"/>
+        <jar eager="true" href="SecurClient.jar" main="true"/>
+
+        <jar href="lib/DemoController.jar"/>
+        <jar href="lib/DemoValidation.jar"/>
+        <jar href="lib/SecurModel.jar"/>
+        <jar href="lib/beansbinding-1.2.1.jar"/>
+        <jar href="lib/cglib-2.1.3.jar"/>
+        <jar href="lib/commons-logging-1.1.jar"/>
+        <jar href="lib/spring-2.5.jar"/>
+        <jar href="lib/substance.jar"/>
+    </resources>
+    <application-desc main-class="app.client.SecurRichClient">
+
+    </application-desc>
+</jnlp>

@@ -1,0 +1,32 @@
+"C:\Program Files\Java\jdk1.6.0_18\bin\keytool" -genkey -keyalg rsa -alias feaakey -validity 3650
+
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" beansbinding-1.2.1.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" cglib-2.1.3.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" cglib-2.2.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" commons-logging-1.1.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" DemoController.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" DemoValidation.jar admiterefeaa
+
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" SecurModel.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" spring-2.5.6.SEC01.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" spring-2.5.jar admiterefeaa
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" substance.jar admiterefeaA
+
+
+
+"C:\Program Files\Java\jdk1.6.0_18\bin\keytool" -genkey -keystore myKeyStore -alias me
+"C:\Program Files\Java\jdk1.6.0_18\bin\keytool" -selfcert -keystore myKeyStore -alias me
+
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore substance.jar me
+
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore beansbinding-1.2.1.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore cglib-2.1.3.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore cglib-2.2.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore commons-logging-1.1.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore DemoController.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore DemoValidation.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore SecurModel.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore spring-2.5.6.SEC01.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore spring-2.5.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore substance.jar me
+"C:\Program Files\Java\jdk1.6.0_18\bin\jarsigner" -keystore myKeyStore SecurClient.jar me
