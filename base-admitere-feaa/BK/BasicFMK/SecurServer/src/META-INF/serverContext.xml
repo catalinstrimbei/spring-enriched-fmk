@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <bean id="applicationService" class="app.services.impl.ApplicationServiceImpl">
+    </bean>
+    
+    <!-- Application Services Publication -->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ApplicationService"/>
+        <property name="service" ref="applicationService"/>
+        <property name="serviceInterface" value="app.services.ApplicationService"/>
+        <property name="registryPort" value="1299"/>
+    </bean>
+
+    <!-- Configurare actiuni -->
+    <bean id="newAction" class="app.controller.actions.NewAction">
+        <constructor-arg><value>NewAction</value></constructor-arg>
+        <constructor-arg><ref bean="applicationService"/></constructor-arg>
+    </bean>
+
+    <!-- Inregistrare actiuni pentru controller -->
+    <bean id="appActionController" class="app.controller.AppActionController">
+        <property name="actions">
+            <list>
+                <ref bean="newAction"/>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Publicare controller ca business service -->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="AppActionController"/>
+        <property name="service" ref="appActionController"/>
+        <property name="serviceInterface" value="app.controller.patterns.IApplicationController"/>
+        <property name="registryPort" value="1399"/>
+    </bean>
+
+    <!-- configurare reguli de validare -->
+    <bean id="appValidationController" class="app.validation.controller.ValidationController">
+        <!--
+        <property name="rules">
+            <map>
+                <entry>
+                    <key><value>app.domain.model.Client@dencl</value></key>
+                    <bean class="app.validation.rules.StringCaseValidation">
+                        <property name="caseType" value="initcap"/>
+                    </bean>
+                </entry>
+                <entry>
+                </entry>
+            </map>
+        </property>
+        -->
+    </bean>
+
+    <!-- Publicare validation controller ca business service -->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ValidationController"/>
+        <property name="service" ref="appValidationController"/>
+        <property name="serviceInterface" value="java.beans.VetoableChangeListener"/>
+        <property name="registryPort" value="1499"/>
+    </bean>
+</beans>

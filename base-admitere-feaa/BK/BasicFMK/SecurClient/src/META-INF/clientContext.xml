@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns='http://www.springframework.org/schema/beans'
+   xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd '>
+
+    <bean id="appActionController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1399/AppActionController"/>
+        <property name="serviceInterface" value="app.controller.patterns.IApplicationController"/>
+    </bean>
+    
+    <bean id="richClientActionController" class="app.client.controller.RichClientActionController">
+        <property name="actionListeners" ref="appActionController"/>
+        <property name="forms">
+            <map>
+                <entry>
+                    <key><value>Clienti</value></key>
+                    <value>app.client.ui.FormClienti</value>
+                </entry>
+                <entry>
+                    <key><value>Produse</value></key>
+                    <value>app.client.ui.FormProduse</value>
+                </entry>
+                <entry>
+                    <key><value>GridClienti</value></key>
+                    <value>app.client.ui.FormGridClienti</value>
+                </entry>
+                <entry>
+                    <key><value>Facturi</value></key>
+                    <value>app.client.ui.FormFacturi</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="validationController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1499/ValidationController"/>
+        <property name="serviceInterface" value="java.beans.VetoableChangeListener"/>
+    </bean>
+
+    <bean id = "validationAutoWire" class = "app.validation.support.ValidationAutoWire">
+        <constructor-arg ref="validationController"/>
+    </bean>
+</beans>
