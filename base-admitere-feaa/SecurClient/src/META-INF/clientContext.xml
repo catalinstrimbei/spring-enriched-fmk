@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns='http://www.springframework.org/schema/beans'
+   xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd '>
+
+
+
+    <bean id="appActionController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!-- <property name="serviceUrl" value="rmi://10.10.0.20:1399/AppActionController"/> -->
+        <property name="serviceUrl" value="rmi://localhost:1399/AppActionController"/>
+        <property name="serviceInterface" value="app.controller.patterns.IApplicationController"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="validationController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!-- <property name="serviceUrl" value="rmi://10.10.0.20:1499/ValidationController"/> -->
+        <property name="serviceUrl" value="rmi://localhost:1499/ValidationController"/>
+        <property name="serviceInterface" value="java.beans.VetoableChangeListener"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+
+    <!-- Configurare actiuni -->
+    <bean id="sortUsers" class="app.controller.actions.SortUsersAction">
+        <constructor-arg><value>SortUsers</value></constructor-arg>
+    </bean>
+    
+    <bean id="richClientActionController" class="app.client.controller.RichClientActionController">
+
+        <property name="actionListeners" ref="appActionController"/>
+        
+        <property name="forms">
+            <map>
+                <entry>
+                    <key><value>Utilizatori</value></key>
+                    <value>app.client.ui.FormUsers</value>
+                </entry>
+                <entry>
+                    <key><value>Operatiuni Directe</value></key>
+                    <value>app.client.ui.FormDirectUserOperations</value>
+                </entry>
+                <entry>
+                    <key><value>Roluri</value></key>
+                    <value>app.client.ui.FormBatchRoleOperations</value>
+                </entry>
+            </map>
+        </property>
+        <property name="actions">
+            <list>
+                <ref bean="sortUsers"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id = "validationAutoWire" class = "app.validation.support.ValidationAutoWire">
+        <constructor-arg ref="validationController"/>
+    </bean>
+</beans>

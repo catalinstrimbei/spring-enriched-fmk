@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SecurClient" default="default" basedir=".">
+    <description>Signing jar for JNPL-Web base deploy of SecurClient</description>
+<!--
+    Document   : SignJarAnt.xml
+    Created on : July 14, 2010, 9:13 AM
+    Author     : catalin.strimbei
+    Description:
+        Purpose of the document follows.
+
+    keytool -genkey -alias -keyalg RSA -keystore -validity 365
+
+    C:\Program Files\Java\jdk1.6.0_18\bin\keytool -genkey -alias ALIAS -keystore KEYSTORE_FILE
+
+    "C:\Program Files\Java\jdk1.6.0_18\bin\keytool" -genkey -alias admitere -keystore kst_file.txt
+
+    storetype="pkcs12"
+-->
+<target name="SignSecurAdm">
+    <signjar keystore="${basedir}/certDir/kst_file.txt"
+      alias="admitere"
+      storepass="admitere">
+      <path>
+        <fileset dir="dist" includes="**/*.jar" />
+      </path>
+    </signjar>
+</target>
+
+</project>
